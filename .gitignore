@@ -1,0 +1,11 @@
+# Logs
+logs
+*.log
+debug.log*
+
+test.php
+
+# project
+project
+test
+package
