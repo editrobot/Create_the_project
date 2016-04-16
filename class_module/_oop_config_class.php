@@ -10,6 +10,10 @@
 				"english" => "project path is",
 				"chinese" => "项目路径是"
 			),
+			"project_lib_path_is" => array(
+				"english" => "project lib path is",
+				"chinese" => "库模块路径是"
+			),
 			"project_module_path_is" => array(
 				"english" => "project module path is",
 				"chinese" => "功能模块路径是"
@@ -47,6 +51,8 @@
 			"project_root_path" => "project/",
 			"project_name" => "default",
 			"project_path" => "",
+			"project_lib_path_name" => "lib",
+			"project_lib_path" => "",
 			"project_module_path_name" => "module",
 			"project_module_path" => "",
 			"project_template_path_name" => "template",
@@ -65,6 +71,7 @@
 
 			//生成项目路径
 			$this->config_array["project_path"] = $this->config_array["project_root_path"].$this->config_array["project_name"].'/';
+			$this->config_array["project_lib_path"] = $this->config_array["project_path"].$this->config_array["project_lib_path_name"].'/';
 			$this->config_array["project_module_path"] = $this->config_array["project_path"].$this->config_array["project_module_path_name"].'/';
 			$this->config_array["project_template_path"] = $this->config_array["project_path"].$this->config_array["project_template_path_name"].'/';
 			$this->config_array["project_cache_path"] = $this->config_array["project_path"].$this->config_array["project_cache_path_name"].'/';
@@ -75,7 +82,9 @@
 
 			echo $this->printf_word("work_dir").':'.getcwd();
 			echo "<br/>";
-			echo $this->printf_word("project_path_is").':'.$this->config_array["project_path"];											//打印项目根路径
+			echo $this->printf_word("project_path_is").':'.$this->config_array["project_path"];								//打印项目根路径
+			echo "<br/>";
+			echo $this->printf_word("project_lib_path_is").':'.$this->config_array["project_lib_path"];										//打印项目根路径
 			echo "<br/>";
 			echo $this->printf_word("project_module_path_is").':'.$this->config_array["project_module_path"];							//打印模块路径
 			echo "<br/>";
@@ -130,6 +139,7 @@
 
 			//部署目录结构
 			mkdir($this->config_array["project_path"]);				//创建项目根
+			mkdir($this->config_array["project_lib_path"]);			//创建库模块目录
 			mkdir($this->config_array["project_module_path"]);		//创建模块目录
 			mkdir($this->config_array["project_template_path"]);	//创建模板目录
 			mkdir($this->config_array["project_cache_path"]);		//创建缓存目录
@@ -195,7 +205,7 @@
 									LOCK_EX);
 				//创建页面文件
 				file_put_contents($this->config_array["project_path"].$value->name.'.'.$value->format,
-									$value->make_page(),
+									$value->make_page('config'),
 									LOCK_EX);
 
 				//创建css文件

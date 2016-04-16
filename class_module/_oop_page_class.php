@@ -1,5 +1,4 @@
 <?php
-
 class _oop_css_file_class{
 	public $config_array;
 	public $css_file_name;
@@ -117,14 +116,15 @@ class _oop_page_class{
 		';
 	}
 
-	public function make_page(){
+	public function make_page($extends_class){
 
 			return '<?php
 	//'.$this->printf_word("page_name").':'.$this->name.'
 	//创建时间:'.time().'
 	//负责人:___________________
+	include("module/'.((isset($extends_class))?('_oop_'.$extends_class.'_class.php'):('')).'");
 
-	class _oop_this_page_template{
+	class _oop_this_page_template'.((isset($extends_class))?(' extends _oop_'.$extends_class.'_class'):('')).'{
 		public $charset = "utf-8";
 		public $title = \''.$this->title.'\';
 		public $key_word_array = array();
