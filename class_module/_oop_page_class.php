@@ -134,7 +134,7 @@ class _oop_page_class{
 		public $content = "";
 
 		public function page_include_module(){
-			include("module/_oop_config_class.php");			//加载配置文件
+
 		}
 
 		public function page_define(){
